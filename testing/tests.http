@@ -1,0 +1,117 @@
+@baseUrl = https://muhammadabduljabbar-production.up.railway.app
+@ownerToken = {{OWNER_TOKEN}}
+@cashierToken = {{CASHIER_TOKEN}}
+@customerToken = {{CUSTOMER_TOKEN}}
+
+### Register a new user (owner)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "owner1",
+  "password": "password123",
+  "role": "owner"
+}
+
+### Register a new user (cashier)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "cashier1",
+  "password": "password123",
+  "role": "cashier"
+}
+
+### Register a new user (customer)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "customer1",
+  "password": "password123",
+  "role": "customer"
+}
+
+### Login as owner
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "owner1",
+  "password": "password123"
+}
+
+### Login as cashier
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "cashier1",
+  "password": "password123"
+}
+
+### Login as customer
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "customer1",
+  "password": "password123"
+}
+
+### Add a menu item (owner only)
+POST {{baseUrl}}/menu
+Content-Type: application/json
+Authorization: Bearer {{ownerToken}}
+
+{
+  "name": "Fadil",
+  "description": "Fadil yang dibaluti Tepung",
+  "price": 3.50
+}
+
+### Get all menu items
+GET {{baseUrl}}/menu
+Authorization: Bearer {{ownerToken}}
+
+### Update a menu item (owner only)
+PUT {{baseUrl}}/menu/1
+Content-Type: application/json
+Authorization: Bearer {{ownerToken}}
+
+{
+  "name": "Espresso",
+  "description": "Strong black coffee",
+  "price": 4.00
+}
+
+### Delete a menu item (owner only)
+DELETE {{baseUrl}}/menu/1
+Authorization: Bearer {{ownerToken}}
+
+### Create a new order (customer only)
+POST {{baseUrl}}/orders
+Content-Type: application/json
+Authorization: Bearer {{customerToken}}
+
+{
+  "menuItems": [
+    {
+      "id": 2,
+      "quantity": 2
+    }
+  ]
+}
+
+### Get all orders (cashier only)
+GET {{baseUrl}}/orders
+Authorization: Bearer {{cashierToken}}
+
+### Complete an order (cashier only)
+PUT {{baseUrl}}/orders/1
+Authorization: Bearer {{cashierToken}}
+
+### Get sales report (owner only)
+GET {{baseUrl}}/sales-report
+Authorization: Bearer {{ownerToken}}
